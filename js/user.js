@@ -2,19 +2,22 @@ import { users, images } from "./db.js";
 
 const container = document.getElementById('profile-container');
 
-const userId = parseInt(localStorage.getItem('selectedUserId')) || 1;
-const user = users.find(u => u.id === userId) || users[0];
-
 const profileHeader = document.createElement('div');
 profileHeader.className = 'profile-header';
 
 const imgBlock = document.createElement('div');
 imgBlock.className = 'profile-image';
-imgBlock.innerHTML = `<img src="../img/${images[userId - 1]}" width="100" alt="Profile Picture">`;
+
+const randomIndex = Math.floor(Math.random() * images.length);
+const randomImage = images[randomIndex];
+
+imgBlock.innerHTML = `<img src="../img/${randomImage}" width="100" alt="Profile Picture">`;
 profileHeader.appendChild(imgBlock);
 
 const profileInfo = document.createElement('div');
 profileInfo.className = 'profile-info';
+
+const user = users[0];
 
 const name = document.createElement('h2');
 name.textContent = user.name;
